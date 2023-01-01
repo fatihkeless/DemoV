@@ -11,6 +11,9 @@ public class GiftControl : MonoBehaviour
      Transform newparent;
     private bool oneShot;
 
+    float time;
+    float timer = 0.5f;
+
     private void Start()
     {
 
@@ -37,12 +40,20 @@ public class GiftControl : MonoBehaviour
             {
                 gift = hit.collider.gameObject.transform.parent.gameObject;
                 Debug.Log(gift.GetComponent<ItemSlot>().ItemName);
+                
+
                 if (wheelNew.IsDone)
                 {
 
                     if (oneShot)
                     {
-                        addList(gift);
+                        time += Time.deltaTime;
+                        
+                        if (time >= timer)
+                        {
+                            addList(gift);
+                        }
+                        
                     }
 
                 }
@@ -59,6 +70,7 @@ public class GiftControl : MonoBehaviour
     {
 
         var objNew = Instantiate(obj, obj.transform.position, Quaternion.identity);
+        objNew.GetComponent<RectTransform>().transform.localPosition += new Vector3(-500, 0, 0);
         objNew.transform.parent = newparent;
         ItemSlot objItemSlot = objNew.GetComponent<ItemSlot>();
         gameManager.addItemList(objNew, objItemSlot.ItemImage, objItemSlot.ItemName, objItemSlot.ItemCount);

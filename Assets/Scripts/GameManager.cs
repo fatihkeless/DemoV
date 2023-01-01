@@ -171,9 +171,27 @@ public class GameManager : MonoBehaviour
         newInventory.ItemName = itemName;
         newInventory.ItemCount = itemCount;
 
-        items.Add(newInventory);
-       
-        
+        if (!items.Contains(newInventory))
+        {
+            items.Add(newInventory);
+        }
+        else
+        {
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].ItemName == newInventory.ItemName)
+                {
+                    items[i].ItemCount += newInventory.ItemCount;
+                    
+                }
+            }
+
+            
+
+        }
+
+
 
     }
 
