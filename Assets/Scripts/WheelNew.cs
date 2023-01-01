@@ -33,6 +33,8 @@ public class WheelNew : MonoBehaviour
         currentLevel = 0;
         isTurning = false;
         isDone = false;
+        _spinButton.GetComponent<Button>().interactable = true;
+
         Button btn = _spinButton.GetComponent<Button>();
         btn.onClick.AddListener(spinOnClick);
 

@@ -132,9 +132,10 @@ public class GameManager : MonoBehaviour
     void spawnWheel()
     {
         int n = levelCount;
-        var newObj = Instantiate(objWheel, wheelParent);
+        var newObj = Instantiate(objWheel);
         newObj.transform.parent = wheelParent;
         newObj.GetComponent<RectTransform>().localPosition =firstPos;
+        newObj.transform.name = objWheel.transform.name;
 
         Image spin = newObj.transform.GetChild(0).GetComponent<Image>();
         Image tooth = newObj.transform.GetChild(2).GetComponent<Image>();
@@ -171,7 +172,8 @@ public class GameManager : MonoBehaviour
         newInventory.ItemCount = itemCount;
 
         items.Add(newInventory);
-
+       
+        
 
     }
 

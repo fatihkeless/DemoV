@@ -8,6 +8,7 @@ public class GiftControl : MonoBehaviour
     [SerializeField]private WheelNew wheelNew;
     [SerializeField]private GameManager gameManager;
     public GameObject gift;
+     Transform newparent;
     private bool oneShot;
 
     private void Start()
@@ -15,14 +16,14 @@ public class GiftControl : MonoBehaviour
 
         oneShot = true;
         wheelNew = transform.parent.transform.GetChild(0).GetComponent<WheelNew>();
+        newparent = transform.parent.transform.parent;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
     }
 
     private void Update()
     {
-        if (wheelNew.IsDone)
-        {
+       
             //Get the mouse position on the screen and send a raycast into the game world from that position.
             Vector2 worldPoint = transform.position;
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.down);
@@ -32,21 +33,24 @@ public class GiftControl : MonoBehaviour
             //If something was hit, the RaycastHit2D.collider will not be null.
             if (hit.collider != null)
             {
-                if (hit.collider.transform.tag == "Gift")
+            if (hit.collider.transform.tag == "Gift")
+            {
+                gift = hit.collider.gameObject.transform.parent.gameObject;
+                Debug.Log(gift.GetComponent<ItemSlot>().ItemName);
+                if (wheelNew.IsDone)
                 {
-                    gift = hit.collider.gameObject.transform.parent.gameObject;
-                    Debug.Log(gift.GetComponent<ItemSlot>().ItemName);
+
                     if (oneShot)
                     {
                         addList(gift);
                     }
 
                 }
-
+            }
                 
             }
 
-        }
+        
         
     }
 
@@ -55,9 +59,9 @@ public class GiftControl : MonoBehaviour
     {
 
         var objNew = Instantiate(obj, obj.transform.position, Quaternion.identity);
-        objNew.transform.parent = obj.transform;
-        ItemSlot objItemSlot = obj.GetComponent<ItemSlot>();
-        gameManager.addItemList(obj, objItemSlot.ItemImage, objItemSlot.ItemName, objItemSlot.ItemCount);
+        objNew.transform.parent = newparent;
+        ItemSlot objItemSlot = objNew.GetComponent<ItemSlot>();
+        gameManager.addItemList(objNew, objItemSlot.ItemImage, objItemSlot.ItemName, objItemSlot.ItemCount);
        
         oneShot = false;
         
