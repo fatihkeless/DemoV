@@ -38,6 +38,8 @@ public class WheelNew : MonoBehaviour
         Button btn = _spinButton.GetComponent<Button>();
         btn.onClick.AddListener(spinOnClick);
 
+        childObj.Clear();
+
         foreach (Transform child in gameObject.transform)
         {
             childObj.Add(child.gameObject);
@@ -58,7 +60,8 @@ public class WheelNew : MonoBehaviour
             Text amaountText = newObj.transform.GetChild(1).GetComponent<Text>();
 
             ItemData newItemData = getDropStateItem(stateData);
-            NewImage.sprite = getDropStateItem(stateData).ItemSprite;
+            
+            NewImage.sprite = newItemData.ItemSprite;
 
             newObj.GetComponent<ItemSlot>().ItemData = newItemData;
             newObj.GetComponent<ItemSlot>().ItemCount = newItemData.itemCount;
@@ -68,7 +71,7 @@ public class WheelNew : MonoBehaviour
 
 
             amaountText.text = getDropStateItem(stateData).itemCount.ToString() + "X";
-            Debug.Log(getDropStateItem(stateData).ItemName);
+
 
         }
 
@@ -89,6 +92,7 @@ public class WheelNew : MonoBehaviour
             {
 
                 transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Round(transform.rotation.eulerAngles.z / 45f) * 45f);
+
                 isDone = true;
 
             }

@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     public Sprite silverSpinTooth;
     public Sprite goldSpin;
     public Sprite goldSpinTooth;
+    bool itemFound;
 
-    
+
     [Header("Level Image")]
     [SerializeField] GameObject levelImage;
     Vector3 ImagePos; 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        itemFound = false;
 
         levelCount = 1;
 
@@ -55,7 +57,6 @@ public class GameManager : MonoBehaviour
 
             Vector3 newObjVector = levelImage.GetComponent<RectTransform>().localPosition;
 
-            Debug.Log(newObjVector);
 
             var objImage = Instantiate(levelImage, objParent);
 
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
 
 
         }
+
 
 
 
@@ -161,37 +163,53 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void addItemList(GameObject obj,Image image,string itemName,int itemCount)
+    public void addItemList(Image image,string itemName,int itemCount)
     {
 
         Inventory newInventory = new Inventory();
 
-        newInventory.ItemObj = obj;
         newInventory.ItemImage = image;
         newInventory.ItemName = itemName;
         newInventory.ItemCount = itemCount;
 
-        if (!items.Contains(newInventory))
+
+        if (!itemFound)
         {
             items.Add(newInventory);
+            itemFound = true;
+
         }
+
         else
         {
+            foreach (Inventory inven in items)
 
-            for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].ItemName == newInventory.ItemName)
+
+                if (inven.ItemName == itemName)
                 {
-                    items[i].ItemCount += newInventory.ItemCount;
-                    
+
+                    inven.ItemCount += itemCount;
+
+
+
+                    break;
+
+
                 }
+                else if (inven.ItemName != itemName)
+                {
+                    items.Add(newInventory);
+
+                    break;
+                }
+
             }
-
-            
-
         }
 
-
+        
+            
+        
 
     }
 
@@ -201,7 +219,6 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class Inventory
 {
-    public GameObject ItemObj;
     public Image ItemImage;
     public string ItemName;
     public int ItemCount;
