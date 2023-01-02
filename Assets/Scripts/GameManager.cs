@@ -9,7 +9,7 @@ public  enum GameStage { play,win,lose}
 public class GameManager : MonoBehaviour
 {
     public  GameStage gameStage;
-    private List<Inventory> items = new List<Inventory>();
+    [SerializeField] private List<Inventory> items = new List<Inventory>();
     public List<Inventory> Items { get => items; }
 
 

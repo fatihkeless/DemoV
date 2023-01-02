@@ -5,15 +5,19 @@ using UnityEngine;
 public class GiftControl : MonoBehaviour
 {
 
-    [SerializeField]private GameObject wheelNew;
-    [SerializeField]private WheelNew wheelNewScript;
-    [SerializeField]private GameManager gameManager;
+    private GameObject wheelNew;
+    
+    private WheelNew wheelNewScript;
+    
+    private GameManager gameManager;
+    
     public GameObject gift;
-     Transform newparent;
+    
+    Transform newparent;
+    
     private bool oneShot;
 
-    float time;
-    float timer = 0.5f;
+
 
     private void Start()
     {
@@ -101,7 +105,7 @@ public class GiftControl : MonoBehaviour
     }
 
 
-    public void addList(GameObject obj)
+    private void addList(GameObject obj)
     {
 
         var objNew = Instantiate(obj, obj.transform.position, Quaternion.identity);

@@ -25,7 +25,7 @@ public class PauseManager : MonoBehaviour
         collectButton.onClick.AddListener(itemCollectFunc);
 
         winRestartbtn = winCanvas.transform.GetChild(2).gameObject.GetComponent<Button>();
-        winRestartbtn.onClick.AddListener(restart);
+        winRestartbtn.onClick.AddListener(back);
 
     }
 
@@ -42,6 +42,13 @@ public class PauseManager : MonoBehaviour
             winCanvas.SetActive(true);
         }
 
+        else
+        {
+            failCanvas.SetActive(false);
+            winCanvas.SetActive(false);
+        }
+
+
     }
 
 
@@ -54,6 +61,12 @@ public class PauseManager : MonoBehaviour
 
     }
 
+    void back()
+    {
+        winCanvas.SetActive(false);
+        gameManager.gameStage = GameStage.play;
+    }
+
     void itemCollectFunc()
     {
         gameManager.gameStage = GameStage.win;
@@ -64,9 +77,11 @@ public class PauseManager : MonoBehaviour
         {
             newtext.text = "Items not Found ";
         }
-        else
+        else 
         {
-            winRestartbtn.GetComponent<GameObject>().SetActive(false);
+            
+            winRestartbtn.gameObject.SetActive(false);
+            newtext.text = "items collected ";
         }
 
 

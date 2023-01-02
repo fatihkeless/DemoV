@@ -7,16 +7,24 @@ public class WheelNew : MonoBehaviour
 {
     private float rotSpeed = 0;
 
+    
     private bool isTurning;
     public bool IsTurning { get => isTurning; }
 
+    
     private bool isDone;
     public bool IsDone { get => isDone; }
 
-    [SerializeField] private Button _spinButton;
+    
+    private int currentLevel;
+
+    public int CurrenLevel { get => currentLevel; set => currentLevel = value; }
 
 
-    [SerializeField] private List<GameObject> childObj = new List<GameObject>();
+    private Button _spinButton;
+
+
+    private List<GameObject> childObj = new List<GameObject>();
 
     public List<GameObject> ChildObj { get => childObj; set => childObj = value; }
 
@@ -26,15 +34,19 @@ public class WheelNew : MonoBehaviour
 
 
 
-    int currentLevel;
+    
 
     private void Awake()
     {
         currentLevel = 0;
         isTurning = false;
         isDone = false;
-        _spinButton.GetComponent<Button>().interactable = true;
 
+
+
+        _spinButton = transform.parent.gameObject.transform.GetChild(1).gameObject.GetComponent<Button>();
+
+        _spinButton.GetComponent<Button>().interactable = true;
         Button btn = _spinButton.GetComponent<Button>();
         btn.onClick.AddListener(spinOnClick);
 
