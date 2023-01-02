@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public  enum GameStage { play,win,lose}
+
+
 public class GameManager : MonoBehaviour
 {
-
-    public List<Inventory> items = new List<Inventory>();
+    public  GameStage gameStage;
+    private List<Inventory> items = new List<Inventory>();
+    public List<Inventory> Items { get => items; }
 
 
     [SerializeField] GameObject objWheel;
@@ -42,6 +46,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        gameStage = GameStage.play;
+
         itemFound = false;
 
         levelCount = 1;
@@ -93,45 +100,38 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    
+
+
+    void nextStage()
     {
-       
-
-        if (Input.GetKeyDown(KeyCode.A))
+        levelCount++;
+        StartCoroutine(spawnWheel());
+        for (int i = 0; i < levelSlideList.Count; i++)
         {
-            levelCount++;
 
-            spawnWheel();
-            for (int i = 0; i < levelSlideList.Count; i++)
+
+            Vector3 lastPos = levelSlideList[i].GetComponent<RectTransform>().localPosition;
+            levelSlideList[i].GetComponent<RectTransform>().localPosition = new Vector3(lastPos.x - 130, lastPos.y, lastPos.z);
+
+            if (i + 1 == levelCount)
             {
 
+                levelSlideList[i].transform.GetChild(1).gameObject.SetActive(true);
 
-                Vector3 lastPos = levelSlideList[i].GetComponent<RectTransform>().localPosition;
-                levelSlideList[i].GetComponent<RectTransform>().localPosition = new Vector3(lastPos.x - 130, lastPos.y, lastPos.z);
-
-                if(i + 1 == levelCount )
-                {
-
-                    levelSlideList[i].transform.GetChild(1).gameObject.SetActive(true);
-
-
-                }
-                else
-                {
-                    levelSlideList[i].transform.GetChild(1).gameObject.SetActive(false);
-                }
 
             }
+            else
+            {
+                levelSlideList[i].transform.GetChild(1).gameObject.SetActive(false);
+            }
+
         }
-
-
-
-
-
     }
 
-    void spawnWheel()
+
+
+    IEnumerator spawnWheel()
     {
         int n = levelCount;
         var newObj = Instantiate(objWheel);
@@ -158,60 +158,59 @@ public class GameManager : MonoBehaviour
             tooth.sprite = currentSpinTooth;
         }
 
+        newObj.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
         Destroy(objWheel);
+        yield return new WaitForSeconds(0.5f);
+        newObj.SetActive(true);
         objWheel = newObj;
     }
 
 
-    public void addItemList(Image image,string itemName,int itemCount)
+    public void addItemList(Image image, string itemName, int itemCount)
     {
-
         Inventory newInventory = new Inventory();
-
         newInventory.ItemImage = image;
         newInventory.ItemName = itemName;
         newInventory.ItemCount = itemCount;
 
+        bool itemFound = false;
 
-        if (!itemFound)
+
+        if(itemName == "Death")
         {
-            items.Add(newInventory);
-            itemFound = true;
-
+            gameStage = GameStage.lose;
         }
 
-        else
+        if(itemName != "Death")
         {
-            foreach (Inventory inven in items)
 
+            for (int i = 0; i < items.Count; i++)
             {
-
-                if (inven.ItemName == itemName)
+                if (items[i].ItemName == itemName)
                 {
-
-                    inven.ItemCount += itemCount;
-
-
-
-                    break;
-
-
-                }
-                else if (inven.ItemName != itemName)
-                {
-                    items.Add(newInventory);
-
+                    items[i].ItemCount += itemCount;
+                    itemFound = true;
+                    nextStage();
                     break;
                 }
+            }
+
+            if (!itemFound)
+            {
+                items.Add(newInventory);
+                nextStage();
 
             }
         }
-
         
-            
-        
-
     }
+
+
+
+   
 
 
 }
