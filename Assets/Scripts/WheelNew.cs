@@ -33,12 +33,21 @@ public class WheelNew : MonoBehaviour
     public List<LevelDatas> stateData = new List<LevelDatas>();
 
 
+    private GameManager gameManager;
 
+
+    [SerializeField] private float finalAngle;
     
+    private bool oneShot;
+
 
     private void Awake()
     {
+
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
         currentLevel = 0;
+        oneShot = true;
         isTurning = false;
         isDone = false;
 
@@ -94,18 +103,27 @@ public class WheelNew : MonoBehaviour
     void Update()
     {
 
-        if (isTurning)
+        if (isTurning && !isDone)
         {
             transform.Rotate(0, 0, this.rotSpeed * Time.deltaTime);
 
             this.rotSpeed *= 0.99f;
-
-            if (rotSpeed <= 1)
+            
+            if (rotSpeed <= 1 && oneShot)
             {
 
                 transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Round(transform.rotation.eulerAngles.z / 45f) * 45f);
-
+                
                 isDone = true;
+
+                finalAngle = transform.localEulerAngles.z;
+                giftControl();
+                
+
+
+                Debug.Log(isDone);
+
+                
 
             }
 
@@ -117,6 +135,66 @@ public class WheelNew : MonoBehaviour
 
     }
 
+
+
+    void giftControl()
+    {
+
+        if( 337.5f < finalAngle && finalAngle < 22.5f)
+        {
+            addList(childObj[0]);
+        }
+        
+        else if (22.5f < finalAngle && finalAngle < 67.5f)
+        {
+            addList(childObj[1]);
+        }
+
+        else if (67.5f < finalAngle && finalAngle < 112.5f)
+        {
+            addList(childObj[2]);
+        }
+        else if (112.5f < finalAngle && finalAngle < 157.5f)
+        {
+            addList(childObj[3]);
+        }
+
+        else if (157.5f < finalAngle && finalAngle < 202.5f)
+        {
+            addList(childObj[4]);
+        }
+        else if (202.5f < finalAngle && finalAngle < 247.5f)
+        {
+            addList(childObj[5]);
+        }
+        else if (247.5f < finalAngle && finalAngle < 292.5f)
+        {
+            addList(childObj[6]);
+        }
+        else if (292.5f < finalAngle && finalAngle < 337.5f)
+        {
+            addList(childObj[7]);
+        }
+    }
+
+
+
+
+
+    private void addList(GameObject obj)
+    {
+
+        var objNew = Instantiate(obj, obj.transform.position, Quaternion.identity);
+        objNew.GetComponent<ItemSlot>().ItemSatete = itemState.move;
+        Debug.Log(objNew.GetComponent<ItemSlot>().ItemSatete);
+
+        gameManager.addItemList(objNew.GetComponent<ItemSlot>().ItemImage, objNew.GetComponent<ItemSlot>().ItemName, objNew.GetComponent<ItemSlot>().ItemCount);
+        objNew.transform.parent = gameManager.WheelParent;
+
+        oneShot = false;
+
+
+    }
 
 
 

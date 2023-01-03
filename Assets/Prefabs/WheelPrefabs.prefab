@@ -722,7 +722,6 @@ GameObject:
   - component: {fileID: 2632225144718140028}
   - component: {fileID: 2632225144718140019}
   - component: {fileID: 2632225144718140030}
-  - component: {fileID: 2632225144718140029}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -812,21 +811,6 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &2632225144718140029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2632225144718140017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ad776458182f140aa7547a0247467d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wheelNew: {fileID: 2632225146025986620}
-  gameManager: {fileID: 0}
-  gift: {fileID: 0}
 --- !u!1 &2632225144760812554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,12 +2182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c45cc3481c61546aacdcbaa34c1606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spinButton: {fileID: 2632225145694018031}
-  childObj: []
   stateData:
   - levelIndex: 0
     "\u0131temData":
-    - DropChance: 7.3
+    - DropChance: 5.1
       itemName: 
       itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
     - DropChance: 55.6
@@ -2212,7 +2194,7 @@ MonoBehaviour:
     - DropChance: 18.9
       itemName: 
       itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
-    - DropChance: 100
+    - DropChance: 13.4
       itemName: 
       itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
     - DropChance: 72.3
@@ -2221,10 +2203,88 @@ MonoBehaviour:
     - DropChance: 43.4
       itemName: 
       itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
-    - DropChance: 80.1
+    - DropChance: 62.4
       itemName: 
       itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
-    - DropChance: 33.9
+    - DropChance: 100
+      itemName: 
+      itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
+  - levelIndex: 1
+    "\u0131temData":
+    - DropChance: 100
+      itemName: 
+      itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
+    - DropChance: 55.6
+      itemName: 
+      itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
+    - DropChance: 18.9
+      itemName: 
+      itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
+    - DropChance: 13.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
+    - DropChance: 72.3
+      itemName: 
+      itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
+    - DropChance: 43.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
+    - DropChance: 62.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
+    - DropChance: 100
+      itemName: 
+      itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
+  - levelIndex: 2
+    "\u0131temData":
+    - DropChance: 100
+      itemName: 
+      itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
+    - DropChance: 55.6
+      itemName: 
+      itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
+    - DropChance: 18.9
+      itemName: 
+      itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
+    - DropChance: 13.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
+    - DropChance: 72.3
+      itemName: 
+      itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
+    - DropChance: 43.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
+    - DropChance: 62.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
+    - DropChance: 100
+      itemName: 
+      itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
+  - levelIndex: 3
+    "\u0131temData":
+    - DropChance: 100
+      itemName: 
+      itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
+    - DropChance: 55.6
+      itemName: 
+      itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
+    - DropChance: 18.9
+      itemName: 
+      itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
+    - DropChance: 13.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
+    - DropChance: 72.3
+      itemName: 
+      itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
+    - DropChance: 43.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
+    - DropChance: 62.4
+      itemName: 
+      itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
+    - DropChance: 100
       itemName: 
       itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
 --- !u!1 &2632225146050600430

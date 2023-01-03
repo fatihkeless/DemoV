@@ -24,8 +24,8 @@ public class ItemSlot : MonoBehaviour
 
     public Image ItemImage { get => _itemImage; set => _itemImage = value; }
 
-    private Vector3 endPos = new Vector3(-1111,11,0);
-    private Vector3 firstPos;
+    private Vector2 endPos = new Vector3(-1111,11,0);
+    private Vector2 firstPos;
     RectTransform rectTransform;
 
     float duration = 0.5f;
@@ -33,13 +33,13 @@ public class ItemSlot : MonoBehaviour
 
 
 
-    private itemState _itemState;
+   [SerializeField] private itemState _itemState;
     public itemState ItemSatete { get => _itemState; set => _itemState = value; }
 
     private void Start()
     {
         _itemState = itemState.normal;
-        firstPos = GetComponent<RectTransform>().transform.position;
+        firstPos = GetComponent<RectTransform>().anchoredPosition;
         rectTransform = GetComponent<RectTransform>();
 
 
@@ -50,17 +50,18 @@ public class ItemSlot : MonoBehaviour
     {
 
 
-        if(_itemState == itemState.move)
+        if (_itemState == itemState.move)
         {
-            rectTransform.position = Vector3.Lerp(rectTransform.position, endPos, 1f);
+            rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.position, endPos, 0.05f);
         }
 
-        
 
 
 
 
-        
+
+
+
     }
 
 

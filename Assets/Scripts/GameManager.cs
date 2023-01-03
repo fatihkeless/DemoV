@@ -8,14 +8,19 @@ public  enum GameStage { play,win,lose}
 
 public class GameManager : MonoBehaviour
 {
-    public  GameStage gameStage;
+    public GameStage gameStage;
     [SerializeField] private List<Inventory> items = new List<Inventory>();
+
+
     public List<Inventory> Items { get => items; }
 
+    public List<Inventory> awardsList = new List<Inventory>();
 
     [SerializeField] GameObject objWheel;
     Vector3 firstPos;
-    [SerializeField]  Transform wheelParent;
+    [SerializeField] private Transform wheelParent;
+    public Transform WheelParent { get => wheelParent; set => wheelParent = value; }
+
 
 
     [Header("Spin Image")]
@@ -30,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Image")]
     [SerializeField] GameObject levelImage;
-    Vector3 ImagePos; 
+    Vector3 ImagePos;
 
     [SerializeField] Sprite safeImage;
     [SerializeField] Sprite bonusImage;
@@ -40,6 +45,19 @@ public class GameManager : MonoBehaviour
 
     private int levelCount;
     public int LevelCount { get => levelCount; set => levelCount = value; }
+
+
+    [SerializeField] GameObject awards;
+    [SerializeField] Transform awardsTransform;
+
+
+
+
+    public Vector2 awardsPos;
+
+    // y pos farký 120
+
+
 
 
 
@@ -56,7 +74,7 @@ public class GameManager : MonoBehaviour
         firstPos = objWheel.GetComponent<RectTransform>().localPosition;
         ImagePos = levelImage.GetComponent<RectTransform>().localPosition;
 
-        for(int i = 0; i< 91; i++)
+        for (int i = 0; i < 91; i++)
         {
             int n = levelCount + i;
 
@@ -95,18 +113,32 @@ public class GameManager : MonoBehaviour
 
         }
 
+        awardsPos = awards.GetComponent<RectTransform>().anchoredPosition;
+
+
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            awards.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = items[0].ItemImage.sprite;
+        }
+
+
 
 
 
     }
 
-    
-
-
     void nextStage()
     {
         levelCount++;
         StartCoroutine(spawnWheel());
+
+
+
         for (int i = 0; i < levelSlideList.Count; i++)
         {
 
@@ -136,7 +168,7 @@ public class GameManager : MonoBehaviour
         int n = levelCount;
         var newObj = Instantiate(objWheel);
         newObj.transform.parent = wheelParent;
-        newObj.GetComponent<RectTransform>().localPosition =firstPos;
+        newObj.GetComponent<RectTransform>().localPosition = firstPos;
         newObj.transform.name = objWheel.transform.name;
 
         Image spin = newObj.transform.GetChild(0).GetComponent<Image>();
@@ -179,12 +211,12 @@ public class GameManager : MonoBehaviour
         bool itemFound = false;
 
 
-        if(itemName == "Death")
+        if (itemName == "Death")
         {
             gameStage = GameStage.lose;
         }
 
-        if(itemName != "Death")
+        if (itemName != "Death")
         {
 
             for (int i = 0; i < items.Count; i++)
@@ -193,24 +225,45 @@ public class GameManager : MonoBehaviour
                 {
                     items[i].ItemCount += itemCount;
                     itemFound = true;
+
                     nextStage();
+
                     break;
                 }
             }
 
+
+
+
             if (!itemFound)
             {
                 items.Add(newInventory);
+
+
+
+
                 nextStage();
 
             }
         }
-        
+
+    }
+
+    private void addAwardsList()
+    {
+
+            var awardsObj = Instantiate(awards);
+
+            awardsObj.transform.parent = awardsTransform;
+
+            awardsObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(awards.GetComponent<RectTransform>().anchoredPosition.x, awards.GetComponent<RectTransform>().anchoredPosition.y - (awardsList.Count* 120));
+
+            awards.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Items[0].ItemImage.sprite;
+
+
     }
 
 
-
-   
 
 
 }
@@ -225,6 +278,9 @@ public class Inventory
     
     
 }
+
+
+
 
 
 
