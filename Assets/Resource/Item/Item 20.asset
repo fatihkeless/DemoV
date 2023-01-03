@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965a57c25110a394aa6c8d38ead12c6b, type: 3}
   m_Name: Item 20
   m_EditorClassIdentifier: 
-  ItemSprite: {fileID: 0}
-  ItemName: 
-  DropChance: 0
+  ItemSprite: {fileID: 21300000, guid: 779679a5943b68747ab6e0cf5bec4cea, type: 3}
+  ItemName: KnifePoints
+  itemCount: 1

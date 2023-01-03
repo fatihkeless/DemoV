@@ -2183,110 +2183,105 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateData:
-  - levelIndex: 0
-    "\u0131temData":
-    - DropChance: 5.1
-      itemName: 
+  - "\u0131temData":
+    - DropChance: 0
+      itemName: Death
+      itemCount: 119
       itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
-    - DropChance: 55.6
-      itemName: 
+    - DropChance: 23.6
+      itemName: GlassesEaster
+      itemCount: 93
       itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
-    - DropChance: 18.9
-      itemName: 
+    - DropChance: 16.6
+      itemName: CapEaster
+      itemCount: 118
       itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
-    - DropChance: 13.4
-      itemName: 
+    - DropChance: 75.8
+      itemName: Cash
+      itemCount: 77
       itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
-    - DropChance: 72.3
-      itemName: 
+    - DropChance: 40.1
+      itemName: ChestBigNolight
+      itemCount: 1
       itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
-    - DropChance: 43.4
-      itemName: 
+    - DropChance: 30.6
+      itemName: ChestBronzeNolight
+      itemCount: 138
       itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
-    - DropChance: 62.4
-      itemName: 
+    - DropChance: 37
+      itemName: ChestGoldNolight
+      itemCount: 104
       itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
-    - DropChance: 100
-      itemName: 
+    - DropChance: 24.9
+      itemName: ChestSilverNolight
+      itemCount: 1
       itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
-  - levelIndex: 1
-    "\u0131temData":
+    - DropChance: 46.5
+      itemName: Gold
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: aa90740629198aa4188d9efa304544c4, type: 2}
+    - DropChance: 49.7
+      itemName: Pumpkin
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: 3468c23b9fc167e4f900515321a80da5, type: 2}
+    - DropChance: 54.2
+      itemName: Bayonet
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: c6cf5cdfe0e476c4e9f60dab9ede0dd2, type: 2}
+    - DropChance: 55.4
+      itemName: Bomb
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: 0c466f6f7694dc54a8a2af6847e44234, type: 2}
+    - DropChance: 38.2
+      itemName: HealthShot
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: dec1e91bc54f3dd459ce54d849f453b1, type: 2}
+    - DropChance: 46.5
+      itemName: Shotgun
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: 2ad156d892c6ff14abeb40c7a2f0b47c, type: 2}
+    - DropChance: 54.2
+      itemName: Renders
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: 28f25253bb0ca6846982fd5be44afdaa, type: 2}
+    - DropChance: 49.1
+      itemName: Rifle
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: 9253426de1ba83f408ba84074c79aa34, type: 2}
+    - DropChance: 42.1
+      itemName: P90
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: 2fab1a830552ab7418438f6ece1307db, type: 2}
+    - DropChance: 45.2
+      itemName: AWP
+      itemCount: 1
+      itemData: {fileID: 11400000, guid: da54fde2872cfcc4ba472f25b59cdafa, type: 2}
+    - DropChance: 48.4
+      itemName: Armor
+      itemCount: 111
+      itemData: {fileID: 11400000, guid: def93c8f0f6cc5c459018582ffe75961, type: 2}
+    - DropChance: 44
+      itemName: KnifePoints
+      itemCount: 75
+      itemData: {fileID: 11400000, guid: 09c2e9f031add044ea189f2b0530033a, type: 2}
+    - DropChance: 41.4
+      itemName: AWPpoints
+      itemCount: 71
+      itemData: {fileID: 11400000, guid: 96afa8cda8b3afd4791ea28543ad7ea1, type: 2}
+  - "\u0131temData":
     - DropChance: 100
-      itemName: 
+      itemName: Death
+      itemCount: 1
       itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
-    - DropChance: 55.6
-      itemName: 
+    - DropChance: 100
+      itemName: GlassesEaster
+      itemCount: 40
       itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
-    - DropChance: 18.9
-      itemName: 
+    - DropChance: 16.6
+      itemName: CapEaster
+      itemCount: 177
       itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
-    - DropChance: 13.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
-    - DropChance: 72.3
-      itemName: 
-      itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
-    - DropChance: 43.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
-    - DropChance: 62.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
-    - DropChance: 100
-      itemName: 
-      itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
-  - levelIndex: 2
-    "\u0131temData":
-    - DropChance: 100
-      itemName: 
-      itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
-    - DropChance: 55.6
-      itemName: 
-      itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
-    - DropChance: 18.9
-      itemName: 
-      itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
-    - DropChance: 13.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
-    - DropChance: 72.3
-      itemName: 
-      itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
-    - DropChance: 43.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
-    - DropChance: 62.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
-    - DropChance: 100
-      itemName: 
-      itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
-  - levelIndex: 3
-    "\u0131temData":
-    - DropChance: 100
-      itemName: 
-      itemData: {fileID: 11400000, guid: 2b762f2bc483b8b4788c1d843db569af, type: 2}
-    - DropChance: 55.6
-      itemName: 
-      itemData: {fileID: 11400000, guid: c9b6192a9a48fbe4696363306ba456f1, type: 2}
-    - DropChance: 18.9
-      itemName: 
-      itemData: {fileID: 11400000, guid: 888866002f2d6134cb198d7e7e5f3512, type: 2}
-    - DropChance: 13.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: dfaa0974e2de2d349bbe708018ddda44, type: 2}
-    - DropChance: 72.3
-      itemName: 
-      itemData: {fileID: 11400000, guid: 5cdec949a02588d4a8d64d6227ccc5de, type: 2}
-    - DropChance: 43.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: 94e016b132e154348a0a7908130694c7, type: 2}
-    - DropChance: 62.4
-      itemName: 
-      itemData: {fileID: 11400000, guid: f45382a0a77c8fd44a7b21b41a11f0cd, type: 2}
-    - DropChance: 100
-      itemName: 
-      itemData: {fileID: 11400000, guid: 4f130938a065e984a9331ea3ddd3bbe4, type: 2}
+  finalAngle: 0
 --- !u!1 &2632225146050600430
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
 
     public List<Inventory> Items { get => items; }
 
-    public List<Inventory> awardsList = new List<Inventory>();
+    private List<Inventory> awardsList = new List<Inventory>();
+
+    private List<GameObject> awardsImage = new List<GameObject>();
 
     [SerializeField] GameObject objWheel;
     Vector3 firstPos;
@@ -116,6 +118,27 @@ public class GameManager : MonoBehaviour
         awardsPos = awards.GetComponent<RectTransform>().anchoredPosition;
 
 
+        for(int j = 0;j < 91; j++)
+        {
+            var awardsObj = Instantiate(awards);
+
+            awardsObj.transform.parent = awardsTransform;
+
+            awardsObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(awards.GetComponent<RectTransform>().anchoredPosition.x, awards.GetComponent<RectTransform>().anchoredPosition.y - (j * 120));
+
+            awardsObj.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
+
+            awardsImage.Add(awardsObj);
+            if (j == 90)
+            {
+                Destroy(awards);
+            }
+
+        }
+
+
+
+
     }
 
 
@@ -127,7 +150,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-
+        
 
 
     }
@@ -219,6 +242,8 @@ public class GameManager : MonoBehaviour
         if (itemName != "Death")
         {
 
+            addAwardsList(newInventory);
+
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].ItemName == itemName)
@@ -249,18 +274,46 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void addAwardsList()
+
+    //awardsControl
+    private void addAwardsList(Inventory newAwards)
     {
 
-            var awardsObj = Instantiate(awards);
+        bool awardsFound = false;
+        
+        for(int i = 0;i < awardsList.Count; i++)
+        {
+          
+            if(awardsList[i].ItemName == newAwards.ItemName)
+            {
+                awardsList[i].ItemCount += newAwards.ItemCount;
+                awardsFound = true;
+                
+                break;
+            }
+            
+        }
+        if (!awardsFound)
+        {
+            awardsList.Add(newAwards);
+        }
 
-            awardsObj.transform.parent = awardsTransform;
+        StartCoroutine(imageControl());
 
-            awardsObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(awards.GetComponent<RectTransform>().anchoredPosition.x, awards.GetComponent<RectTransform>().anchoredPosition.y - (awardsList.Count* 120));
+    }
 
-            awards.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Items[0].ItemImage.sprite;
+    private IEnumerator imageControl()
+    {
+        yield return new WaitForSeconds(2);
 
 
+        for(int i = 0; i < awardsList.Count; i++)
+        {
+            awardsImage[i].transform.GetChild(0).gameObject.GetComponent<Image>().enabled = true;
+            awardsImage[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = awardsList[i].ItemImage.sprite;
+            awardsImage[i].transform.GetChild(1).gameObject.GetComponent<Text>().text = "X" + awardsList[i].ItemCount.ToString();
+
+        }
     }
 
 

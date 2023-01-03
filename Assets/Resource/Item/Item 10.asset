@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965a57c25110a394aa6c8d38ead12c6b, type: 3}
   m_Name: Item 10
   m_EditorClassIdentifier: 
-  ItemSprite: {fileID: 0}
-  ItemName: 
-  DropChance: 0
+  ItemSprite: {fileID: 21300000, guid: 64693d6bb0cd3784783f64a491776dea, type: 3}
+  ItemName: Pumpkin
   itemCount: 1

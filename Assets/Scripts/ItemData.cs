@@ -8,18 +8,9 @@ public class ItemData : ScriptableObject
 {
     public Sprite ItemSprite;
     public string ItemName;
-    [Range(0,100)]public float DropChance;
     public int itemCount;
 
-    public ItemData(string itemName, float dropChance)
-    {
-        
-        
-        itemName = ItemName;
-        dropChance = DropChance;
-
-
-    }
+    
 
     
 

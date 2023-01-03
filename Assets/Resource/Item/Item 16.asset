@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965a57c25110a394aa6c8d38ead12c6b, type: 3}
   m_Name: Item 16
   m_EditorClassIdentifier: 
-  ItemSprite: {fileID: 0}
-  ItemName: 
-  DropChance: 0
+  ItemSprite: {fileID: 21300000, guid: 81ce7cda27b61bf459b073f8ed5aabd3, type: 3}
+  ItemName: Rifle
+  itemCount: 1

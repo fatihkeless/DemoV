@@ -15,7 +15,7 @@ public class WheelNew : MonoBehaviour
     private bool isDone;
     public bool IsDone { get => isDone; }
 
-    
+
     private int currentLevel;
 
     public int CurrenLevel { get => currentLevel; set => currentLevel = value; }
@@ -139,39 +139,35 @@ public class WheelNew : MonoBehaviour
 
     void giftControl()
     {
-
-        if( 337.5f < finalAngle && finalAngle < 22.5f)
+        if (finalAngle < 22.5f || 337.5f <= finalAngle)
         {
             addList(childObj[0]);
         }
-        
-        else if (22.5f < finalAngle && finalAngle < 67.5f)
+        else if (22.5f <= finalAngle && finalAngle < 67.5f)
         {
             addList(childObj[1]);
         }
-
-        else if (67.5f < finalAngle && finalAngle < 112.5f)
+        else if (67.5f <= finalAngle && finalAngle < 112.5f)
         {
             addList(childObj[2]);
         }
-        else if (112.5f < finalAngle && finalAngle < 157.5f)
+        else if (112.5f <= finalAngle && finalAngle < 157.5f)
         {
             addList(childObj[3]);
         }
-
-        else if (157.5f < finalAngle && finalAngle < 202.5f)
+        else if (157.5f <= finalAngle && finalAngle < 202.5f)
         {
             addList(childObj[4]);
         }
-        else if (202.5f < finalAngle && finalAngle < 247.5f)
+        else if (202.5f <= finalAngle && finalAngle < 247.5f)
         {
             addList(childObj[5]);
         }
-        else if (247.5f < finalAngle && finalAngle < 292.5f)
+        else if (247.5f <= finalAngle && finalAngle < 292.5f)
         {
             addList(childObj[6]);
         }
-        else if (292.5f < finalAngle && finalAngle < 337.5f)
+        else if (292.5f <= finalAngle && finalAngle < 337.5f)
         {
             addList(childObj[7]);
         }
@@ -183,14 +179,24 @@ public class WheelNew : MonoBehaviour
 
     private void addList(GameObject obj)
     {
+        
+          
+        var objNew = Instantiate(obj, obj.transform.position, Quaternion.identity);      
+        
+        ItemSlot itemSlotNew = objNew.GetComponent<ItemSlot>();
 
-        var objNew = Instantiate(obj, obj.transform.position, Quaternion.identity);
-        objNew.GetComponent<ItemSlot>().ItemSatete = itemState.move;
-        Debug.Log(objNew.GetComponent<ItemSlot>().ItemSatete);
 
         gameManager.addItemList(objNew.GetComponent<ItemSlot>().ItemImage, objNew.GetComponent<ItemSlot>().ItemName, objNew.GetComponent<ItemSlot>().ItemCount);
+          
         objNew.transform.parent = gameManager.WheelParent;
 
+          
+        if(itemSlotNew.ItemName != "Death")
+        {
+            itemSlotNew.ItemState = itemState.move;
+        }
+            
+          
         oneShot = false;
 
 
@@ -209,7 +215,7 @@ public class WheelNew : MonoBehaviour
 
 
 
-   
+
 
     ItemData getDropStateItem(List<LevelDatas> level)
     {
@@ -217,7 +223,18 @@ public class WheelNew : MonoBehaviour
         if (level[currentLevel].ýtemData == null || level[currentLevel].ýtemData.Count == 0)
             return null;
 
-        float randomNumber = Random.Range(1, 100f);
+        float totalDropChance = 0;
+
+        for(int i = 0;i < level[currentLevel].ýtemData.Count; i++)
+        {
+            totalDropChance += level[currentLevel].ýtemData[i].DropChance;
+            
+        }
+        Debug.Log(totalDropChance);
+
+
+
+        float randomNumber = Random.Range(1, totalDropChance);
 
         for (int i = 0; i < level[currentLevel].ýtemData.Count; i++)
         {
@@ -229,7 +246,12 @@ public class WheelNew : MonoBehaviour
                 dropChance = 0;
 
             if (randomNumber <= dropChance)
-                return level[currentLevel].ýtemData[i].itemData;
+               
+            return level[currentLevel].ýtemData[i].itemData;
+            level[currentLevel].ýtemData[i].itemData.itemCount = level[currentLevel].ýtemData[i].itemCount;
+            randomNumber -= level[currentLevel].ýtemData[i].DropChance;
+
+           
         }
 
         return null;
@@ -241,7 +263,9 @@ public class WheelNew : MonoBehaviour
 
 
 
+
+
 }
 
- 
+
 

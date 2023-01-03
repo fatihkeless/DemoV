@@ -16,7 +16,6 @@ public class StateData : ScriptableObject
 [System.Serializable]
 public class LevelDatas
 {
-    public int levelIndex;
     
     public List<ItemDatas> ýtemData = new List<ItemDatas>();
 
@@ -31,10 +30,12 @@ public class ItemDatas
 
     [Range(0, 100)] public float DropChance;
 
-    [InspectorName("Item Name")]
+
+
+
     public string itemName;
 
-    public string ItemName { get => itemData.ItemName; set => itemData.ItemName = value; }
+    public int itemCount;
 
 
     public ItemData itemData;
@@ -45,6 +46,7 @@ public class ItemDatas
 
 
 }
+
 
 
 

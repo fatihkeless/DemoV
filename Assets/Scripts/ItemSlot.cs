@@ -24,23 +24,31 @@ public class ItemSlot : MonoBehaviour
 
     public Image ItemImage { get => _itemImage; set => _itemImage = value; }
 
-    private Vector2 endPos = new Vector3(-1111,11,0);
+    private Vector2 endPos = new Vector2(-830, 84);
+
     private Vector2 firstPos;
+    
     RectTransform rectTransform;
 
-    float duration = 0.5f;
-    float t = 0f;
 
 
 
-   [SerializeField] private itemState _itemState;
-    public itemState ItemSatete { get => _itemState; set => _itemState = value; }
+
+
+    private itemState _itemState;
+    public itemState ItemState { get => _itemState; set => _itemState = value; }
+
+    private void Awake()
+    {
+        _itemState = itemState.normal;
+    }
 
     private void Start()
     {
-        _itemState = itemState.normal;
+
         firstPos = GetComponent<RectTransform>().anchoredPosition;
         rectTransform = GetComponent<RectTransform>();
+        
 
 
     }
@@ -52,20 +60,20 @@ public class ItemSlot : MonoBehaviour
 
         if (_itemState == itemState.move)
         {
-            rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.position, endPos, 0.05f);
+            StartCoroutine(move());
+
         }
-
-
-
-
-
-
 
 
     }
 
 
-
-
+    IEnumerator move()
+    {
+        rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, endPos, Time.deltaTime * 2);
+        yield return new WaitForSeconds(1);
+        Destroy(this.gameObject);
+    }
+    
 
 }
