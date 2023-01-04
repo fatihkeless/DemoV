@@ -30,7 +30,8 @@ public class WheelNew : MonoBehaviour
 
 
 
-    public List<LevelDatas> stateData = new List<LevelDatas>();
+    // oyun içi eþyalarýn düþme oranlarý ve kaç tane düþeceðiniz inspectordan bu listeden ayarlýyoruz
+    [SerializeField] private List<LevelDatas> stateData = new List<LevelDatas>();
 
 
     private GameManager gameManager;
@@ -59,8 +60,10 @@ public class WheelNew : MonoBehaviour
         Button btn = _spinButton.GetComponent<Button>();
         btn.onClick.AddListener(spinOnClick);
 
+        // önceki state ten kalan listeyi temizliyelim
         childObj.Clear();
 
+        // çarkýn altýndaki objeleri bir listenin altýnda toplayalým
         foreach (Transform child in gameObject.transform)
         {
             childObj.Add(child.gameObject);
@@ -71,7 +74,7 @@ public class WheelNew : MonoBehaviour
     void Start()
     {
         
-
+        // child listesinindeki itemleri random gelecek þekilde düzenliyelim
         for (int i = 0; i < childObj.Count; i++)
         {
             
@@ -102,6 +105,7 @@ public class WheelNew : MonoBehaviour
 
     void Update()
     {
+        // çark çevirme kodu ve kontrol kodu
 
         if (isTurning && !isDone)
         {
@@ -136,7 +140,7 @@ public class WheelNew : MonoBehaviour
     }
 
 
-
+    // hediyenin hangisi olduðunu kontrol edip sonra addListi çaðýralým
     void giftControl()
     {
         if (finalAngle < 22.5f || 337.5f <= finalAngle)
@@ -175,7 +179,7 @@ public class WheelNew : MonoBehaviour
 
 
 
-
+    // gameManagerdeki item ekleme fonksiyonunu çaðýralarým, soldaki item paneline gitcek yeni bir gameobj oluþturalým ve ItemState ini move olarak ayarlýyalým
 
     private void addList(GameObject obj)
     {
@@ -204,7 +208,7 @@ public class WheelNew : MonoBehaviour
 
 
 
-
+    // çarkýn dönmesi için hýzýný belirleyip sonra spin tuþunu týklanamaz hale getirelim
     private void spinOnClick()
     {
         this.rotSpeed = 1000;
@@ -216,18 +220,18 @@ public class WheelNew : MonoBehaviour
 
 
 
-
+    // LevelDatas nesneleri listesinden rastgele bir ItemData nesnesi döndürmek için kullandýðým method
     ItemData getDropStateItem(List<LevelDatas> level)
     {
 
-        if (level[currentLevel].ýtemData == null || level[currentLevel].ýtemData.Count == 0)
+        if (level[gameManager.LevelCount - 1].ýtemData == null || level[gameManager.LevelCount - 1].ýtemData.Count == 0)
             return null;
 
         float totalDropChance = 0;
 
-        for(int i = 0;i < level[currentLevel].ýtemData.Count; i++)
+        for(int i = 0;i < level[gameManager.LevelCount - 1].ýtemData.Count; i++)
         {
-            totalDropChance += level[currentLevel].ýtemData[i].DropChance;
+            totalDropChance += level[gameManager.LevelCount - 1].ýtemData[i].DropChance;
             
         }
         Debug.Log(totalDropChance);
@@ -236,20 +240,20 @@ public class WheelNew : MonoBehaviour
 
         float randomNumber = Random.Range(1, totalDropChance);
 
-        for (int i = 0; i < level[currentLevel].ýtemData.Count; i++)
+        for (int i = 0; i < level[gameManager.LevelCount - 1].ýtemData.Count; i++)
         {
-            if (level[currentLevel].ýtemData[i] == null)
+            if (level[gameManager.LevelCount - 1].ýtemData[i] == null)
                 continue;
 
-            float dropChance = level[currentLevel].ýtemData[i].DropChance;
+            float dropChance = level[gameManager.LevelCount - 1].ýtemData[i].DropChance;
             if (dropChance == 0)
                 dropChance = 0;
 
             if (randomNumber <= dropChance)
                
-            return level[currentLevel].ýtemData[i].itemData;
-            level[currentLevel].ýtemData[i].itemData.itemCount = level[currentLevel].ýtemData[i].itemCount;
-            randomNumber -= level[currentLevel].ýtemData[i].DropChance;
+            return level[gameManager.LevelCount - 1].ýtemData[i].itemData;
+            level[gameManager.LevelCount - 1].ýtemData[i].itemData.itemCount = level[gameManager.LevelCount - 1].ýtemData[i].itemCount;
+            randomNumber -= level[gameManager.LevelCount - 1].ýtemData[i].DropChance;
 
            
         }

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> awardsImage = new List<GameObject>();
 
+    public List<GameObject> collectAwardsImage = new List<GameObject>();
+
     [SerializeField] GameObject objWheel;
     Vector3 firstPos;
     [SerializeField] private Transform wheelParent;
@@ -45,14 +47,15 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> levelSlideList = new List<GameObject>();
 
-    private int levelCount;
+    [SerializeField]private int levelCount;
     public int LevelCount { get => levelCount; set => levelCount = value; }
 
 
     [SerializeField] GameObject awards;
     [SerializeField] Transform awardsTransform;
 
-
+    [SerializeField] GameObject collectAwards;
+    [SerializeField] Transform collectAwardsTransform;
 
 
     public Vector2 awardsPos;
@@ -60,7 +63,10 @@ public class GameManager : MonoBehaviour
     // y pos farký 120
 
 
-
+    private void Awake()
+    {
+        levelCount = 1;
+    }
 
 
     // Start is called before the first frame update
@@ -71,12 +77,14 @@ public class GameManager : MonoBehaviour
 
         itemFound = false;
 
-        levelCount = 1;
+        
 
         firstPos = objWheel.GetComponent<RectTransform>().localPosition;
         ImagePos = levelImage.GetComponent<RectTransform>().localPosition;
+        
+        // level slide listi     oluþturalým
 
-        for (int i = 0; i < 91; i++)
+        for (int i = 0; i < 45; i++)
         {
             int n = levelCount + i;
 
@@ -93,6 +101,7 @@ public class GameManager : MonoBehaviour
 
             objImage.transform.GetChild(0).gameObject.GetComponent<Text>().text = n.ToString();
 
+            // resimlerin renklerini düzenliyelim
 
             if (n % 30 == 0 && n != 0)
             {
@@ -107,7 +116,7 @@ public class GameManager : MonoBehaviour
                 objImage.GetComponent<Image>().sprite = currenImage;
             }
 
-            if (n == 90)
+            if (n == 44)
             {
                 Destroy(levelImage);
             }
@@ -118,8 +127,10 @@ public class GameManager : MonoBehaviour
         awardsPos = awards.GetComponent<RectTransform>().anchoredPosition;
 
 
-        for(int j = 0;j < 91; j++)
+        for(int j = 0;j < 45; j++)
         {
+            // sol taraftaki item toplama yerini oluþturalým
+
             var awardsObj = Instantiate(awards);
 
             awardsObj.transform.parent = awardsTransform;
@@ -128,10 +139,28 @@ public class GameManager : MonoBehaviour
 
             awardsObj.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
 
+
             awardsImage.Add(awardsObj);
-            if (j == 90)
+
+
+            // win panelindeki scroolbarý oluþturalým
+
+            var collect = Instantiate(collectAwards);
+
+            collect.transform.parent = collectAwardsTransform;
+
+            collect.GetComponent<RectTransform>().anchoredPosition = new Vector2(collectAwards.GetComponent<RectTransform>().anchoredPosition.x + ( j * 100), collectAwards.GetComponent<RectTransform>().anchoredPosition.y);
+
+            collect.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
+
+
+            collectAwardsImage.Add(collect);
+
+
+            if (j == 44)
             {
                 Destroy(awards);
+                Destroy(collectAwards);
             }
 
         }
@@ -142,19 +171,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            awards.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = items[0].ItemImage.sprite;
-        }
-
-
-        
-
-
-    }
-
+    
+    // yeni stage geçme
     void nextStage()
     {
         levelCount++;
@@ -185,6 +203,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+    // yeni çark oluþturma
 
     IEnumerator spawnWheel()
     {
@@ -196,6 +215,8 @@ public class GameManager : MonoBehaviour
 
         Image spin = newObj.transform.GetChild(0).GetComponent<Image>();
         Image tooth = newObj.transform.GetChild(2).GetComponent<Image>();
+
+        // levellara göre çarkýmýzýn resimlerini ayarlýyalým
 
         if (n % 30 == 0 && n != 0)
         {
@@ -223,6 +244,8 @@ public class GameManager : MonoBehaviour
         objWheel = newObj;
     }
 
+
+    // item ekleme ve durumlarý
 
     public void addItemList(Image image, string itemName, int itemCount)
     {
@@ -286,7 +309,6 @@ public class GameManager : MonoBehaviour
           
             if(awardsList[i].ItemName == newAwards.ItemName)
             {
-                awardsList[i].ItemCount += newAwards.ItemCount;
                 awardsFound = true;
                 
                 break;
@@ -302,6 +324,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    // eklenen ödüllerden sonra panellerdeki resimleri düzenliyelim
+
     private IEnumerator imageControl()
     {
         yield return new WaitForSeconds(2);
@@ -312,6 +337,12 @@ public class GameManager : MonoBehaviour
             awardsImage[i].transform.GetChild(0).gameObject.GetComponent<Image>().enabled = true;
             awardsImage[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = awardsList[i].ItemImage.sprite;
             awardsImage[i].transform.GetChild(1).gameObject.GetComponent<Text>().text = "X" + awardsList[i].ItemCount.ToString();
+
+
+
+            collectAwardsImage[i].transform.GetChild(0).gameObject.GetComponent<Image>().enabled = true;
+            collectAwardsImage[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = awardsList[i].ItemImage.sprite;
+            collectAwardsImage[i].transform.GetChild(1).gameObject.GetComponent<Text>().text = "X" + awardsList[i].ItemCount.ToString();
 
         }
     }
