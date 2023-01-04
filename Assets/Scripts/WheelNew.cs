@@ -211,7 +211,7 @@ public class WheelNew : MonoBehaviour
     // çarkýn dönmesi için hýzýný belirleyip sonra spin tuþunu týklanamaz hale getirelim
     private void spinOnClick()
     {
-        this.rotSpeed = 1000;
+        this.rotSpeed = 200;
         isTurning = true;
         _spinButton.GetComponent<Button>().interactable = false;
 
